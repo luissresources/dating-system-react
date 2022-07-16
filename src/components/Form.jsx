@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import Error from "./Error";
 
-const Form = () => {
+const Form = ({setPatients, patients}) => {
   const [petsName, setPetsName] = useState('Pet');
   const [petOwner, setPetOwner] = useState('User');
   const [email, setEmail] = useState('');
@@ -16,6 +17,24 @@ const Form = () => {
       setError(true);
     }else {
       setError(false);
+
+      const createPatients = {
+        petsName,
+         petOwner,
+         email,
+         discharge,
+         symtomDetail
+      }
+
+      setPatients([...patients, createPatients]);
+      
+      // Reset Form
+
+      setPetsName('');
+      setPetOwner('');
+      setEmail('');
+      setDischarge('');
+      setSymtomDetail('');
     }
   };
 
@@ -34,11 +53,7 @@ const Form = () => {
         className="bg-white rounded-md shadow-md px-4 py-8"
         onSubmit={handleSubmit}>
           { error && (
-            <p 
-            className='text-white bg-red-700 py-1 px-1 my-4 uppercase text-center'
-            >
-              Complete los datos, para enviar el formulario
-            </p>
+            <Error />
           )}
         <div className="flex flex-col mb-4">
           <label
@@ -115,6 +130,7 @@ const Form = () => {
           type="submit"
           value="Save"
           className="py-2 text-center bg-indigo-600 w-full text-white hover:bg-green-700 transition-all cursor-pointer font-bold"
+          // onClick={() => props.onClickCreatePatient(patient)}
         />
       </form>
     </div>
