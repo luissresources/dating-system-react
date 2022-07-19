@@ -1,8 +1,9 @@
-import React from 'react'
+const Patient = ({patient, setPatient}) => {
 
-export const Patient = ({petsName, petOwner, email, discharge, symtomDetail}) => {
+  const {petsName, petOwner, email, discharge, symtomDetail} = patient;
+
   return (
-    <div className="patient-list bg-white rounded-md shadow-md px-4 py-8 my-6 sm:my-12">
+    <div className="patient-list bg-white rounded-md shadow-md px-4 py-4">
       <p className="patient-list__pets-name uppercase text-gray-700 font-bold">Pet's name:{" "}
         <span className="font-normal capitalize">{petsName}</span>
       </p>
@@ -18,6 +19,20 @@ export const Patient = ({petsName, petOwner, email, discharge, symtomDetail}) =>
       <p className="patient-list__symtom-detail uppercase text-gray-700 font-bold">Discharge:{" "}
         <span className="font-normal capitalize">{symtomDetail}</span>
       </p>
+      <div className="flex justify-between pt-4">
+        <button 
+          type="text" 
+          className="py-1 px-6 bg-indigo-600 hover:bg-indigo-700 rounded-md text-white transition-all"
+          onClick={() => setPatient(patient)}
+          >
+            Edit
+        </button>
+        <button 
+          type="text" 
+          className="py-1 px-6 bg-red-600 hover:bg-red-700 rounded-md text-white transition-all">
+            Delete
+        </button>
+      </div>
     </div>
   )
 }

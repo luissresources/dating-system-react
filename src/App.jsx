@@ -8,6 +8,7 @@ import Patient from './components/Patient';
 function App() {
 
   const [patients, setPatients] = useState([]);
+  const [patient, setPatient] = useState({});
 
   return (
     <>
@@ -18,11 +19,12 @@ function App() {
             // onClickCreatePatient = {savePatients}
             setPatients = {setPatients}
             patients = {patients}
+            patient = {patient}
           />
           <PatientList 
             patients = {patients}
+            setPatient = {setPatient}
           />
-          <Patient />
         </div>
       </div>
       <Footer />

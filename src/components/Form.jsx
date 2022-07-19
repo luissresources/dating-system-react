@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Error from "./Error";
 
-const Form = ({setPatients, patients}) => {
+const Form = ({setPatients, patients, patient}) => {
   const [petsName, setPetsName] = useState('Pet');
   const [petOwner, setPetOwner] = useState('User');
   const [email, setEmail] = useState('');
@@ -20,10 +20,10 @@ const Form = ({setPatients, patients}) => {
 
       const createPatients = {
         petsName,
-         petOwner,
-         email,
-         discharge,
-         symtomDetail
+        petOwner,
+        email,
+        discharge,
+        symtomDetail
       }
 
       setPatients([...patients, createPatients]);
@@ -38,13 +38,21 @@ const Form = ({setPatients, patients}) => {
     }
   };
 
+  useEffect(()=> {
+    setPetsName(patient.petsName);
+    setPetOwner(patient.petOwner);
+    setEmail(patient.email);
+    setDischarge(patient.discharge);
+    setSymtomDetail(patient.symtomDetail);
+  },[patient])
+
   return (
     <div className="mb-6 px-6 md:px-0">
       <h2 className="px-1 py-2 text-center text-white bg-indigo-600 rounded-md">
         Patient follow-up
       </h2>
       <p className="text-center my-6">
-        Add patients y{" "}
+        Add patients and{" "}
         <span className="text-indigo-700 text capitalize">administrators</span>
       </p>
 
@@ -53,7 +61,9 @@ const Form = ({setPatients, patients}) => {
         className="bg-white rounded-md shadow-md px-4 py-8"
         onSubmit={handleSubmit}>
           { error && (
-            <Error />
+            <Error 
+              message={'Complete los datos, para enviar el formulario'}
+            />
           )}
         <div className="flex flex-col mb-4">
           <label
@@ -130,7 +140,6 @@ const Form = ({setPatients, patients}) => {
           type="submit"
           value="Save"
           className="py-2 text-center bg-indigo-600 w-full text-white hover:bg-green-700 transition-all cursor-pointer font-bold"
-          // onClick={() => props.onClickCreatePatient(patient)}
         />
       </form>
     </div>
