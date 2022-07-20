@@ -39,11 +39,13 @@ const Form = ({setPatients, patients, patient}) => {
   };
 
   useEffect(()=> {
-    setPetsName(patient.petsName);
-    setPetOwner(patient.petOwner);
-    setEmail(patient.email);
-    setDischarge(patient.discharge);
-    setSymtomDetail(patient.symtomDetail);
+    if (Object.keys(patient).length > 0) {
+      setPetsName(patient.petsName);
+      setPetOwner(patient.petOwner);
+      setEmail(patient.email);
+      setDischarge(patient.discharge);
+      setSymtomDetail(patient.symtomDetail);
+    }
   },[patient])
 
   return (
@@ -138,7 +140,7 @@ const Form = ({setPatients, patients, patient}) => {
         </div>
         <input
           type="submit"
-          value="Save"
+          value={ patient.key ? 'Edit Patient' : 'Save'}
           className="py-2 text-center bg-indigo-600 w-full text-white hover:bg-green-700 transition-all cursor-pointer font-bold"
         />
       </form>
